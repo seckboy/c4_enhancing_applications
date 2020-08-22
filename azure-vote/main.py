@@ -9,20 +9,24 @@ from datetime import datetime
 
 # App Insights
 # TODO: Import required libraries for App Insights
+from opencensus.ext.azure.log_exporter import AzureLogHandler
 
 # Logging
-logger = # TODO: Setup logger
+logger = logging.getLogger(__name__)
+logger.addHandler(AzureLogHandler(
+    connection_string='InstrumentationKey=8fcb08b6-2cc0-46b2-97c4-2a242d21f908')
+)
 
 # Metrics
-exporter = # TODO: Setup exporter
+#exporter = # TODO: Setup exporter
 
 # Tracing
-tracer = # TODO: Setup tracer
+#tracer = # TODO: Setup tracer
 
 app = Flask(__name__)
 
 # Requests
-middleware = # TODO: Setup flask middleware
+#middleware = # TODO: Setup flask middleware
 
 # Load configurations from environment or config file
 app.config.from_pyfile('config_file.cfg')
