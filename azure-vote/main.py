@@ -43,12 +43,12 @@ tracer = Tracer(
 app = Flask(__name__)
 
 # Requests
-#middleware = # TODO: Setup flask middleware
-# middleware = FlaskMiddleware(
-#     app,
-#     exporter=AzureExporter(connection_string="InstrumentationKey=91f16101-8352-4ab9-a0de-27a07a3d979c"),
-#     sampler=ProbabilitySampler(rate=1.0),
-# )
+middleware = # TODO: Setup flask middleware
+middleware = FlaskMiddleware(
+    app,
+    exporter=AzureExporter(connection_string="InstrumentationKey=91f16101-8352-4ab9-a0de-27a07a3d979c"),
+    sampler=ProbabilitySampler(rate=1.0),
+)
 
 # Load configurations from environment or config file
 app.config.from_pyfile('config_file.cfg')
