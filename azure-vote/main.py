@@ -35,11 +35,11 @@ exporter = metrics_exporter.new_metrics_exporter(
   connection_string='InstrumentationKey=91f16101-8352-4ab9-a0de-27a07a3d979c')
 
 # Tracing
-# tracer = Tracer(
-#     exporter=AzureExporter(
-#         connection_string='InstrumentationKey=91f16101-8352-4ab9-a0de-27a07a3d979c'),
-#     sampler=ProbabilitySampler(1.0),
-# )
+tracer = Tracer(
+    exporter=AzureExporter(
+        connection_string='InstrumentationKey=91f16101-8352-4ab9-a0de-27a07a3d979c'),
+    sampler=ProbabilitySampler(1.0),
+)
 app = Flask(__name__)
 
 # Requests
