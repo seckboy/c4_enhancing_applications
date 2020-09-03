@@ -88,8 +88,11 @@ def index():
         # with tracer.span(name="cat"):
         vote1 = r.get(button1).decode('utf-8')
         # TODO: use tracer object to trace cat vote
+        tracer.span(name="cat")
+
         # with tracer.span(name="dog"):
         vote2 = r.get(button2).decode('utf-8')
+        tracer.span(name="cat")
         # TODO: use tracer object to trace dog vote
 
         # Return index with values
@@ -120,7 +123,7 @@ def index():
             vote = request.form['vote']
             r.incr(vote,1)
             tracer.span(name=vote)
-            
+
             # Get current values
             vote1 = r.get(button1).decode('utf-8')
             vote2 = r.get(button2).decode('utf-8')
