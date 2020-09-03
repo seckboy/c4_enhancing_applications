@@ -92,7 +92,7 @@ def index():
 
         # with tracer.span(name="dog"):
         vote2 = r.get(button2).decode('utf-8')
-        tracer.span(name="cat")
+        tracer.span(name="dog")
         # TODO: use tracer object to trace dog vote
 
         # Return index with values
