@@ -118,9 +118,9 @@ def index():
 
             # Insert vote result into DB
             vote = request.form['vote']
-            with tracer.span(name=vote):
-                r.incr(vote,1)
-
+            r.incr(vote,1)
+            tracer.span(name=vote)
+            
             # Get current values
             vote1 = r.get(button1).decode('utf-8')
             vote2 = r.get(button2).decode('utf-8')
