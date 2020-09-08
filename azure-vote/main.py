@@ -96,8 +96,7 @@ def index():
         with tracer.span(name="dog"):
             logger.warning("dog")
             vote2 = r.get(button2).decode('utf-8')
-            # tc.track_event("dog vote")
-            # tc.flush()
+
         # tracer.span(name="dog")
         # TODO: use tracer object to trace dog vote
 
@@ -116,6 +115,8 @@ def index():
             # TODO: use logger object to log cat vote
             logger.info(properties)
             tracer.span(name="cat")
+            tc.track_event(vote1)
+            tc.flush()
             # tc.track_event(properties)
             # tc.flush()
  
@@ -124,6 +125,8 @@ def index():
             # TODO: use logger object to log dog vote
             logger.info(properties)
             tracer.span(name="dog")
+            tc.track_event(vote2)
+            tc.flush()
             # tc.track_event(properties)
             # tc.flush()
  
