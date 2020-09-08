@@ -11,6 +11,7 @@ from datetime import datetime
 # TODO: Import required libraries for App Insights
 
 from opencensus.ext.azure.log_exporter import AzureLogHandler
+from opencensus.ext.azure.log_exporter import AzureEventHandler
 from opencensus.ext.azure import metrics_exporter
 from opencensus.stats import aggregation as aggregation_module
 from opencensus.stats import measure as measure_module
@@ -30,6 +31,14 @@ logger = logging.getLogger(__name__)
 logger.addHandler(AzureLogHandler(
     connection_string='InstrumentationKey=389cacac-ef2c-4cee-9b76-8b36f73d73d6;IngestionEndpoint=https://westus2-1.in.applicationinsights.azure.com/')
 )
+
+#Events
+eventlogger = logging.getLogger(__name__)
+eventlogger.addHandler(AzureEventHandler(
+    connection_string='InstrumentationKey=389cacac-ef2c-4cee-9b76-8b36f73d73d6;IngestionEndpoint=https://westus2-1.in.applicationinsights.azure.com/')
+)
+eventlogger.setLevel(logging.INFO)
+eventlogger.info('Event logger!')
 
 # Metrics
 exporter = metrics_exporter.new_metrics_exporter(
