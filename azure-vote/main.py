@@ -22,8 +22,8 @@ from opencensus.trace.samplers import ProbabilitySampler
 from opencensus.trace.tracer import Tracer
 from opencensus.ext.flask.flask_middleware import FlaskMiddleware
 from opencensus.trace.samplers import ProbabilitySampler
-from applicationinsights import TelemetryClient
-tc = TelemetryClient('InstrumentationKey=389cacac-ef2c-4cee-9b76-8b36f73d73d6;IngestionEndpoint=https://westus2-1.in.applicationinsights.azure.com/')
+# from applicationinsights import TelemetryClient
+# tc = TelemetryClient('InstrumentationKey=389cacac-ef2c-4cee-9b76-8b36f73d73d6;IngestionEndpoint=https://westus2-1.in.applicationinsights.azure.com/')
 
 #Logging
 logger = logging.getLogger(__name__)
@@ -96,8 +96,8 @@ def index():
         with tracer.span(name="dog"):
             logger.warning("dog")
             vote2 = r.get(button2).decode('utf-8')
-            tc.track_event("dog vote")
-            tc.flush()
+            # tc.track_event("dog vote")
+            # tc.flush()
         # tracer.span(name="dog")
         # TODO: use tracer object to trace dog vote
 
@@ -115,15 +115,17 @@ def index():
             properties = {'custom_dimensions': {'Cats Vote': vote1}}
             # TODO: use logger object to log cat vote
             logger.info(properties)
-            tc.track_event(properties)
-            tc.flush()
+            tracer.span(name="cat")
+            # tc.track_event(properties)
+            # tc.flush()
  
             vote2 = r.get(button2).decode('utf-8')
             properties = {'custom_dimensions': {'Dogs Vote': vote2}}
             # TODO: use logger object to log dog vote
             logger.info(properties)
-            tc.track_event(properties)
-            tc.flush()
+            tracer.span(name="dog")
+            # tc.track_event(properties)
+            # tc.flush()
  
             return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
 
