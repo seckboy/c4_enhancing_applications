@@ -22,6 +22,8 @@ from opencensus.trace.samplers import ProbabilitySampler
 from opencensus.trace.tracer import Tracer
 from opencensus.ext.flask.flask_middleware import FlaskMiddleware
 from opencensus.trace.samplers import ProbabilitySampler
+from applicationinsights import TelemetryClient
+tc = TelemetryClient('InstrumentationKey=389cacac-ef2c-4cee-9b76-8b36f73d73d6;IngestionEndpoint=https://westus2-1.in.applicationinsights.azure.com/')
 
 #Logging
 logger = logging.getLogger(__name__)
@@ -88,14 +90,16 @@ def index():
         with tracer.span(name="cat"):
             logger.warning("cat")
             vote1 = r.get(button1).decode('utf-8')
-            tracer.span(name="cat")
+            tc.track_event("cat vote")
+            tc.flush()
         # TODO: use tracer object to trace cat vote
         # tracer.span(name="cat")
 
         with tracer.span(name="dog"):
             logger.warning("dog")
             vote2 = r.get(button2).decode('utf-8')
-            tracer.span(name="dog")
+            tc.track_event("dog vote")
+            tc.flush()
         # tracer.span(name="dog")
         # TODO: use tracer object to trace dog vote
 
