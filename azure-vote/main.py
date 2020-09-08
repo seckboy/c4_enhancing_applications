@@ -33,7 +33,7 @@ logger.addHandler(AzureLogHandler(
 )
 
 #Events
-eventlogger = logging.getLogger(__name__)
+eventlogger = logging.getLogger('eventlogger')
 eventlogger.addHandler(AzureEventHandler(
     connection_string='InstrumentationKey=389cacac-ef2c-4cee-9b76-8b36f73d73d6;IngestionEndpoint=https://westus2-1.in.applicationinsights.azure.com/')
 )
