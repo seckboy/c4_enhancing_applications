@@ -113,20 +113,20 @@ def index():
             vote1 = r.get(button1).decode('utf-8')
             properties = {'custom_dimensions': {'Cats Vote': vote1}}
             # TODO: use logger object to log cat vote
-            logger.info(properties)
+            logger.info(str(properties))
             tracer.span(name="cat")
-            tc.track_event(vote1)
-            tc.flush()
+            # tc.track_event(vote1)
+            # tc.flush()
             # tc.track_event(properties)
             # tc.flush()
  
             vote2 = r.get(button2).decode('utf-8')
             properties = {'custom_dimensions': {'Dogs Vote': vote2}}
             # TODO: use logger object to log dog vote
-            logger.info(properties)
+            logger.info(str(properties))
             tracer.span(name="dog")
-            tc.track_event(vote2)
-            tc.flush()
+            # tc.track_event(vote2)
+            # tc.flush()
             # tc.track_event(properties)
             # tc.flush()
  
