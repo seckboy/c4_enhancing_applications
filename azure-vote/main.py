@@ -90,9 +90,7 @@ def index():
         with tracer.span(name="cat"):
             logger.warning("cat")
             vote1 = r.get(button1).decode('utf-8')
-            tc.track_event("cat vote")
-            tc.flush()
-        # TODO: use tracer object to trace cat vote
+       # TODO: use tracer object to trace cat vote
         # tracer.span(name="cat")
 
         with tracer.span(name="dog"):
@@ -116,13 +114,17 @@ def index():
             vote1 = r.get(button1).decode('utf-8')
             properties = {'custom_dimensions': {'Cats Vote': vote1}}
             # TODO: use logger object to log cat vote
-            logger.info('cat vote')
-
+            logger.info(properties)
+            tc.track_event(properties)
+            tc.flush()
+ 
             vote2 = r.get(button2).decode('utf-8')
             properties = {'custom_dimensions': {'Dogs Vote': vote2}}
             # TODO: use logger object to log dog vote
-            logger.info('dog vote')
-
+            logger.info(properties)
+            tc.track_event(properties)
+            tc.flush()
+ 
             return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
 
         else:
