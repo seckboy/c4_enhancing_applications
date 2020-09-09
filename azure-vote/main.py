@@ -38,7 +38,7 @@ eventlogger.addHandler(AzureEventHandler(
     connection_string='InstrumentationKey=389cacac-ef2c-4cee-9b76-8b36f73d73d6;IngestionEndpoint=https://westus2-1.in.applicationinsights.azure.com/')
 )
 eventlogger.setLevel(logging.INFO)
-eventlogger.info('Event logger!')
+# eventlogger.info('Event logger!')
 
 # Metrics
 exporter = metrics_exporter.new_metrics_exporter(
@@ -152,11 +152,13 @@ def index():
             # Insert vote result into DB
             vote = request.form['vote']
             r.incr(vote,1)
+            eventlogger.info(vote)
             tracer.span(name=vote)
 
             # Get current values
             vote1 = r.get(button1).decode('utf-8')
             vote2 = r.get(button2).decode('utf-8')
+
 
             # Return results
             return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
