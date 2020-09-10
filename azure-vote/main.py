@@ -27,13 +27,13 @@ from opencensus.trace.samplers import ProbabilitySampler
 #Logging
 logger = logging.getLogger(__name__)
 logger.addHandler(AzureLogHandler(
-    connection_string='InstrumentationKey=389cacac-ef2c-4cee-9b76-8b36f73d73d6;IngestionEndpoint=https://westus2-1.in.applicationinsights.azure.com/')
+    connection_string='InstrumentationKey=3236fae1-a607-4d7d-8b6f-5efd9a0d8155;IngestionEndpoint=https://westus2-0.in.applicationinsights.azure.com/')
 )
 
 #Events
 eventlogger = logging.getLogger('eventlogger')
 eventlogger.addHandler(AzureEventHandler(
-    connection_string='InstrumentationKey=389cacac-ef2c-4cee-9b76-8b36f73d73d6;IngestionEndpoint=https://westus2-1.in.applicationinsights.azure.com/')
+    connection_string='InstrumentationKey=3236fae1-a607-4d7d-8b6f-5efd9a0d8155;IngestionEndpoint=https://westus2-0.in.applicationinsights.azure.com/')
 )
 eventlogger.setLevel(logging.INFO)
 # eventlogger.info('Event logger!')
@@ -41,12 +41,12 @@ eventlogger.setLevel(logging.INFO)
 # Metrics
 exporter = metrics_exporter.new_metrics_exporter(
   enable_standard_metrics=True,
-  connection_string='InstrumentationKey=389cacac-ef2c-4cee-9b76-8b36f73d73d6;IngestionEndpoint=https://westus2-1.in.applicationinsights.azure.com/')
+  connection_string='InstrumentationKey=3236fae1-a607-4d7d-8b6f-5efd9a0d8155;IngestionEndpoint=https://westus2-0.in.applicationinsights.azure.com/')
 
 # Tracing
 tracer = Tracer(
     exporter=AzureExporter(
-        connection_string='InstrumentationKey=389cacac-ef2c-4cee-9b76-8b36f73d73d6;IngestionEndpoint=https://westus2-1.in.applicationinsights.azure.com/'),
+        connection_string='InstrumentationKey=3236fae1-a607-4d7d-8b6f-5efd9a0d8155;IngestionEndpoint=https://westus2-0.in.applicationinsights.azure.com/'),
     sampler=ProbabilitySampler(1.0),
 )
 app = Flask(__name__)
@@ -141,7 +141,9 @@ def index():
             vote = request.form['vote']
             r.incr(vote,1)
             eventlogger.info(vote)
-            tracer.span(name=vote)
+            with tracer.span(name=vote):
+                logger.warning(vote)
+
 
             # Get current values
             vote1 = r.get(button1).decode('utf-8')
