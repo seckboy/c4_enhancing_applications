@@ -95,10 +95,6 @@ def index():
 
         # Get current values
 
-        for i in range(1, 50):
-            x = i + i**2
-            logger.warning(x)
-
         vote1 = r.get(button1).decode('utf-8')
  
        # TODO: use tracer object to trace cat vote
