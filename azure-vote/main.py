@@ -23,8 +23,6 @@ from opencensus.trace.samplers import ProbabilitySampler
 from opencensus.trace.tracer import Tracer
 from opencensus.ext.flask.flask_middleware import FlaskMiddleware
 from opencensus.trace.samplers import ProbabilitySampler
-# from applicationinsights import TelemetryClient
-# tc = TelemetryClient('InstrumentationKey=389cacac-ef2c-4cee-9b76-8b36f73d73d6;IngestionEndpoint=https://westus2-1.in.applicationinsights.azure.com/')
 
 #Logging
 logger = logging.getLogger(__name__)
