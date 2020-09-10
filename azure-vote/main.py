@@ -27,13 +27,13 @@ from opencensus.trace.samplers import ProbabilitySampler
 #Logging
 logger = logging.getLogger(__name__)
 logger.addHandler(AzureLogHandler(
-    connection_string='InstrumentationKey=3236fae1-a607-4d7d-8b6f-5efd9a0d8155;IngestionEndpoint=https://westus2-0.in.applicationinsights.azure.com/')
+    connection_string='InstrumentationKey=02056178-5aa3-4b03-865a-50c76caf3447;IngestionEndpoint=https://westus2-1.in.applicationinsights.azure.com/')
 )
 
 #Events
 eventlogger = logging.getLogger('eventlogger')
 eventlogger.addHandler(AzureEventHandler(
-    connection_string='InstrumentationKey=3236fae1-a607-4d7d-8b6f-5efd9a0d8155;IngestionEndpoint=https://westus2-0.in.applicationinsights.azure.com/')
+    connection_string='InstrumentationKey=02056178-5aa3-4b03-865a-50c76caf3447;IngestionEndpoint=https://westus2-1.in.applicationinsights.azure.com/')
 )
 eventlogger.setLevel(logging.INFO)
 # eventlogger.info('Event logger!')
@@ -41,12 +41,12 @@ eventlogger.setLevel(logging.INFO)
 # Metrics
 exporter = metrics_exporter.new_metrics_exporter(
   enable_standard_metrics=True,
-  connection_string='InstrumentationKey=3236fae1-a607-4d7d-8b6f-5efd9a0d8155;IngestionEndpoint=https://westus2-0.in.applicationinsights.azure.com/')
+  connection_string='InstrumentationKey=02056178-5aa3-4b03-865a-50c76caf3447;IngestionEndpoint=https://westus2-1.in.applicationinsights.azure.com/')
 
 # Tracing
 tracer = Tracer(
     exporter=AzureExporter(
-        connection_string='InstrumentationKey=3236fae1-a607-4d7d-8b6f-5efd9a0d8155;IngestionEndpoint=https://westus2-0.in.applicationinsights.azure.com/'),
+        connection_string='InstrumentationKey=02056178-5aa3-4b03-865a-50c76caf3447;IngestionEndpoint=https://westus2-1.in.applicationinsights.azure.com/'),
     sampler=ProbabilitySampler(1.0),
 )
 app = Flask(__name__)
